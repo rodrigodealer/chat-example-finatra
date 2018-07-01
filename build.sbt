@@ -5,15 +5,17 @@ version := "0.0.1-SNAPSHOT"
 scalaVersion := "2.12.6"
 
 lazy val versions = new {
+  val phantomVersion = "2.24.0"
   val finatra = "18.6.0"
   val guice = "4.2.0"
   val mockito = "2.19.0"
   val scalatest = "3.0.5"
 }
 
+resolvers += "twitter-repo" at "http://maven.twttr.com"
+
 libraryDependencies ++= Seq(
   "com.twitter" %% "finatra-http" % versions.finatra,
-//  "com.twitter" %% "finatra-slf4j" % versions.finatra,
   "com.github.seratch" %% "awscala" % "0.5.+",
   "org.slf4j" % "slf4j-simple" % "1.7.21",
 
@@ -32,5 +34,16 @@ libraryDependencies ++= Seq(
 
   "org.mockito" % "mockito-core" % versions.mockito % "test",
   "org.scalatest" %% "scalatest" % versions.scalatest % "test",
-  "junit" % "junit" % "4.12" % "test"
+  "junit" % "junit" % "4.12" % "test",
+  "com.google.guava" % "guava" % "19.0",
+
+  "com.outworkers"  %% "phantom-dsl" % versions.phantomVersion,
+  "com.outworkers"   %% "phantom-finagle" % versions.phantomVersion
 )
+
+assemblyMergeStrategy in assembly := {
+  case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+  case x => MergeStrategy.first
+}
+
+test in assembly := {}

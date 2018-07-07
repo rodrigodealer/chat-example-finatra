@@ -5,7 +5,7 @@ version := "0.0.1-SNAPSHOT"
 scalaVersion := "2.12.6"
 
 lazy val versions = new {
-  val phantomVersion = "2.24.0"
+  val phantomVersion = "2.24.8"
   val finatra = "18.6.0"
   val guice = "4.2.0"
   val mockito = "2.19.0"
